@@ -37,5 +37,16 @@ namespace FizzBuzz.Test
             var actual = sut.Say(x);
             actual.ShouldBe(x.ToString());
         }
+
+        [Theory]
+        [InlineData(15)]
+        [InlineData(30)]
+        [InlineData(45)]
+        public void WhenXIsDivisbleByBoth3And5SayFizzBuzz(int x)
+        {
+            var sut = new Core.FizzBuzz();
+            var actual = sut.Say(x);
+            actual.ShouldBe("Fizz Buzz");
+        }
     }
 }
