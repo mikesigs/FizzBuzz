@@ -1,19 +1,29 @@
-﻿using Shouldly;
+﻿using System.IO;
+using FizzBuzz.Core;
+using Moq;
+using Shouldly;
 using Xunit;
 
 namespace FizzBuzz.Test
 {
     public class FizzBuzzTests
     {
+        private readonly Mock<IOutputStrategy> _mockOutputStrategy;
+        private readonly Core.FizzBuzz _sut;
+
+        public FizzBuzzTests()
+        {
+            _mockOutputStrategy = new Mock<IOutputStrategy>();
+            _sut = new Core.FizzBuzz(_mockOutputStrategy.Object);
+        }
+
         [Theory]
         [InlineData(3)]
         [InlineData(6)]
         [InlineData(9)]
         public void WhenXIsDivisibleBy3SayFizz(int x)
         {
-            var sut = new Core.FizzBuzz();
-            var actual = sut.Say(x);
-            actual.ShouldBe("Fizz");
+            ShouldSayOnce(x, "Fizz");
         }
 
         [Theory]
@@ -22,9 +32,7 @@ namespace FizzBuzz.Test
         [InlineData(20)]
         public void WhenXIsDivisibleBy5SayBuzz(int x)
         {
-            var sut = new Core.FizzBuzz();
-            var actual = sut.Say(x);
-            actual.ShouldBe("Buzz");
+            ShouldSayOnce(x, "Buzz");
         }
 
         [Theory]
@@ -33,9 +41,7 @@ namespace FizzBuzz.Test
         [InlineData(7)]
         public void WhenXIsNotDivisibleBy3Or5SayX(int x)
         {
-            var sut = new Core.FizzBuzz();
-            var actual = sut.Say(x);
-            actual.ShouldBe(x.ToString());
+            ShouldSayOnce(x, x.ToString());
         }
 
         [Theory]
@@ -44,9 +50,13 @@ namespace FizzBuzz.Test
         [InlineData(45)]
         public void WhenXIsDivisbleByBoth3And5SayFizzBuzz(int x)
         {
-            var sut = new Core.FizzBuzz();
-            var actual = sut.Say(x);
-            actual.ShouldBe("Fizz Buzz");
+            ShouldSayOnce(x, "Fizz Buzz");
+        }
+
+        private void ShouldSayOnce(int input, string expectedOutput)
+        {
+            _sut.Say(input);
+            _mockOutputStrategy.Verify(o => o.WriteLine(expectedOutput), Times.Once);
         }
     }
 }
