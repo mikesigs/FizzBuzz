@@ -15,16 +15,16 @@ namespace FizzBuzz.Core
         {
             foreach (var x in Enumerable.Range(1, upperBound))
             {
-                Say(x);
+                Parse(x);
             }
         }
 
-        public void Say(int i)
+        public string Parse(int i)
         {
-            if (i % 3 == 0 && i % 5 == 0) { _outputStrategy.WriteLine("Fizz Buzz"); }
-            else if (i % 3 == 0) { _outputStrategy.WriteLine("Fizz"); }
-            else if (i % 5 == 0) { _outputStrategy.WriteLine("Buzz"); }
-            else { _outputStrategy.WriteLine(i.ToString()); }
+            if (i % 3 == 0 && i % 5 == 0) { return "Fizz Buzz"; }
+            if (i % 3 == 0) { return "Fizz"; }
+            if (i % 5 == 0) { return "Buzz"; }
+            return i.ToString();
         }
     }
 }

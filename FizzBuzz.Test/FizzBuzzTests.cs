@@ -8,13 +8,11 @@ namespace FizzBuzz.Test
 {
     public class FizzBuzzTests
     {
-        private readonly Mock<IOutputStrategy> _mockOutputStrategy;
         private readonly Core.FizzBuzz _sut;
 
         public FizzBuzzTests()
         {
-            _mockOutputStrategy = new Mock<IOutputStrategy>();
-            _sut = new Core.FizzBuzz(_mockOutputStrategy.Object);
+            _sut = new Core.FizzBuzz(new Mock<IOutputStrategy>().Object);
         }
 
         [Theory]
@@ -23,7 +21,8 @@ namespace FizzBuzz.Test
         [InlineData(9)]
         public void WhenXIsDivisibleBy3SayFizz(int x)
         {
-            ShouldSayOnce(x, "Fizz");
+            var actual = _sut.Parse(x);
+            actual.ShouldBe("Fizz");
         }
 
         [Theory]
@@ -32,7 +31,8 @@ namespace FizzBuzz.Test
         [InlineData(20)]
         public void WhenXIsDivisibleBy5SayBuzz(int x)
         {
-            ShouldSayOnce(x, "Buzz");
+            var actual = _sut.Parse(x);
+            actual.ShouldBe("Buzz");
         }
 
         [Theory]
@@ -41,7 +41,8 @@ namespace FizzBuzz.Test
         [InlineData(7)]
         public void WhenXIsNotDivisibleBy3Or5SayX(int x)
         {
-            ShouldSayOnce(x, x.ToString());
+            var actual = _sut.Parse(x);
+            actual.ShouldBe(x.ToString());
         }
 
         [Theory]
@@ -50,13 +51,8 @@ namespace FizzBuzz.Test
         [InlineData(45)]
         public void WhenXIsDivisbleByBoth3And5SayFizzBuzz(int x)
         {
-            ShouldSayOnce(x, "Fizz Buzz");
-        }
-
-        private void ShouldSayOnce(int input, string expectedOutput)
-        {
-            _sut.Say(input);
-            _mockOutputStrategy.Verify(o => o.WriteLine(expectedOutput), Times.Once);
+            var actual = _sut.Parse(x);
+            actual.ShouldBe("Fizz Buzz");
         }
     }
 }
