@@ -7,9 +7,6 @@ namespace FizzBuzz.Host
     {
         private static void Main(string[] args)
         {
-            /*
-                Git source control with build script
-            */
             var divisorMap = new Dictionary<int, string>
             {
                 { 3, "Fizz" },
