@@ -1,30 +1,27 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace FizzBuzz.Core
 {
     public class FizzBuzz
     {
-        private readonly IOutputStrategy _outputStrategy;
+        private readonly Dictionary<int, string> _divisorMap;
 
-        public FizzBuzz(IOutputStrategy outputStrategy)
+        public FizzBuzz(Dictionary<int, string> divisorMap)
         {
-            _outputStrategy = outputStrategy;
-        }
-
-        public void SayRange(int upperBound)
-        {
-            foreach (var x in Enumerable.Range(1, upperBound))
-            {
-                Parse(x);
-            }
+            _divisorMap = divisorMap;
         }
 
         public string Parse(int i)
         {
-            if (i % 3 == 0 && i % 5 == 0) { return "Fizz Buzz"; }
-            if (i % 3 == 0) { return "Fizz"; }
-            if (i % 5 == 0) { return "Buzz"; }
-            return i.ToString();
+            var messages =
+                _divisorMap
+                       .Where(map => i % map.Key == 0)
+                       .Select(mapping => mapping.Value)
+                       .ToList();
+
+            return !messages.Any() ? i.ToString() : String.Join(" ", messages);
         }
     }
 }
