@@ -10,6 +10,7 @@ namespace FizzBuzz.Core
 
         public FizzBuzz(Dictionary<int, string> divisorMap)
         {
+            if (divisorMap == null) { throw new ArgumentNullException(nameof(divisorMap)); }
             _divisorMap = divisorMap;
         }
 

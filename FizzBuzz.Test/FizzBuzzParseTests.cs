@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Shouldly;
 using Xunit;
@@ -7,6 +8,12 @@ namespace FizzBuzz.Test
 {
     public class FizzBuzzParseTests
     {
+        [Fact]
+        public void WhenDivisorMapIsNullShouldThrowArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() => new Core.FizzBuzz(null));
+        }
+
         [Theory]
         [InlineData(3, 3, "Fizz")]
         [InlineData(6, 3, "Fizz")]
@@ -39,15 +46,6 @@ namespace FizzBuzz.Test
             var sut = new Core.FizzBuzz(divisorMap);
             var actual = sut.ParseRange(1, 10).ToList();
             actual.ShouldBe(expected);
-            actual.ShouldSatisfyAllConditions(
-                () => actual.ShouldContain(x => x == "Fizz", 2),
-                () => actual.ShouldContain(x => x == "Buzz", 2),
-                () => actual.ShouldContain(x => x == "Fizz Boom", 1),
-                () => actual.ShouldContain(x => x == "1", 1),
-                () => actual.ShouldContain(x => x == "2", 1),
-                () => actual.ShouldContain(x => x == "4", 1),
-                () => actual.ShouldContain(x => x == "7", 1),
-                () => actual.ShouldContain(x => x == "8", 1));
         }
     }
 }
