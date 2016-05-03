@@ -19,10 +19,9 @@ namespace FizzBuzz.Host
             var fizzBuzz = new Core.FizzBuzz(divisorMap);
             var upperBound = GetUpperBoundFromUser();
 
-            for (var x = 1; x <= upperBound; x++)
+            foreach (var msg in fizzBuzz.ParseRange(1, upperBound))
             {
-                var value = fizzBuzz.Parse(x);
-                Console.WriteLine(value);
+                Console.WriteLine(msg);
             }
 
             Console.WriteLine();
