@@ -1,0 +1,14 @@
+source https://www.nuget.org/api/v2/
+framework >= net452
+
+nuget FAKE
+nuget Moq
+nuget Shouldly
+nuget xunit
+nuget xunit.abstractions
+nuget xunit.assert
+nuget xunit.core
+nuget xunit.extensibility.core
+nuget xunit.extensibility.execution
+nuget xunit.runner.console
+nuget xunit.runner.visualstudio

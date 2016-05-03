@@ -9,6 +9,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FizzBuzz.Test", "FizzBuzz.T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FizzBuzz.Host", "FizzBuzz.Host\FizzBuzz.Host.csproj", "{AB8DA361-8711-4D7D-99E8-7D17A8E846FF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFiles", "SolutionFiles", "{5E12495D-1374-480D-BC9F-04FCB73EFF5B}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		build.fsx = build.fsx
+		fake.cmd = fake.cmd
+		paket.dependencies = paket.dependencies
+		paket.lock = paket.lock
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
